@@ -4,5 +4,4 @@ This script will install xray-core and generate 3 protocol for default uuid whic
 
 ````
 wget https://raw.githubusercontent.com/crixsz/XrayMultiPath/setup.sh && chmod +x setup.sh && bash setup.sh
-
 ```
