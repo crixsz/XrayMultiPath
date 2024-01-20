@@ -9,11 +9,6 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
 
-function multipath()
-{
-  #install nginx to act as fallback
-  # TODO: nginx, setup nginx,
-}
 rm -rf /usr/local/etc/xray/config.json
 clear
 echo -e "${ORANGE} ===================================="
@@ -93,10 +88,9 @@ else
       clear
       bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install -u root
       rm -rf /usr/local/etc/xray/config.json
-      wget https://raw.githubusercontent.com/crixsz/XrayInstaller/main/config.json && mv config.json /usr/local/etc/xray/
+      wget https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/config.json && mv config.json /usr/local/etc/xray/
       systemctl restart xray
       clear
-      multipath()
   else
       echo -e "${RED}Installation has been cancelled!!"
       sleep 3
