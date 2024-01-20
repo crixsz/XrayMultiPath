@@ -8,6 +8,12 @@ BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
+
+function multipath()
+{
+  #install nginx to act as fallback
+  # TODO: nginx, setup nginx,
+}
 rm -rf /usr/local/etc/xray/config.json
 clear
 echo -e "${ORANGE} ===================================="
@@ -64,12 +70,6 @@ else
   service vnstat restart
   clear
   source .profile
-  echo -e "\e[1;33m
-  ░█▀▀▀█ ░█▀▀█ ░█▀▀█ ▀█▀ ░█▀▀█ ▀▀█▀▀  ░█▀▀█ ░█──░█  ░█▀▀▀ ▀█▀ ░█▀▀█ ─█▀▀█ ▀█▀ 
-  ─▀▀▀▄▄ ░█─── ░█▄▄▀ ░█─ ░█▄▄█ ─░█──  ░█▀▀▄ ░█▄▄▄█  ░█▀▀▀ ░█─ ░█─░█ ░█▄▄█ ░█─ 
-  ░█▄▄▄█ ░█▄▄█ ░█─░█ ▄█▄ ░█─── ─░█──  ░█▄▄█ ──░█──  ░█─── ▄█▄ ─▀▀█▄ ░█─░█ ▄█▄\e[0m"
-  echo ""
-  echo "" 
   echo -e "Do you want to install Multipath Xray(y/n)?"
   echo ""
   read ans
@@ -96,7 +96,7 @@ else
       wget https://raw.githubusercontent.com/crixsz/XrayInstaller/main/config.json && mv config.json /usr/local/etc/xray/
       systemctl restart xray
       clear
-      install multipath()
+      multipath()
   else
       echo -e "${RED}Installation has been cancelled!!"
       sleep 3
