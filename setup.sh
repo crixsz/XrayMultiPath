@@ -18,7 +18,8 @@ setup_nginx(){
   #setup nginx config for xray (nginx.conf and xray.conf)
   echo -e "Configuring Nginx for Xray..."
   rm -rf /etc/nginx/nginx.conf
-  wget -O /etc/nginx.conf https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Nginx/nginx.conf
+  sleep 2
+  wget -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Nginx/nginx.conf
   wget -O /etc/nginx/conf.d/xray.conf https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Nginx/xray.conf
   systemctl restart nginx
   nginx_status=$(systemctl is-active nginx)
