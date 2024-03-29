@@ -97,6 +97,10 @@ install_xray() {
   fi
   clear
   systemctl stop xray
+  if pgrep xray >/dev/null; then
+    echo "Xray is still running. Exiting..."
+exit 0
+  fi
   systemctl disable xray
   clear
   sleep 2
