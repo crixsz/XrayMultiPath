@@ -1,27 +1,4 @@
-clear
-echo "[ Xray Multipath Installation Script ]"
-echo "1) Install Xray Core + Acme.sh + Nginx"
-echo "2) Uninstall Xray Core + Acme.sh + Nginx"
-echo "3) Exit"
-echo ""
-read -p "Select an option [1-3]: " option
-
-case $option in
-  1)
-    install_xray
-    ;;
-  2)
-    echo "Uninstalling Xray Core..."
-    uninstall_xray
-    ;;
-  3)
-    echo "Exiting..."
-    exit 0
-    ;;
-  *)
-    echo "Invalid option. Please select a valid option."
-    ;;
-esac
+### Functions
 setup_nginx(){
   clear
   echo "[Nginx Installation Script]"
@@ -111,3 +88,30 @@ uninstall_xray(){
   bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ remove --purge  
   clear 
   echo "Xray Core uninstalled successfully !!"
+
+
+## Main output
+clear
+echo "[ Xray Multipath Installation Script ]"
+echo "1) Install Xray Core + Acme.sh + Nginx"
+echo "2) Uninstall Xray Core + Acme.sh + Nginx"
+echo "3) Exit"
+echo ""
+read -p "Select an option [1-3]: " option
+
+case $option in
+  1)
+    install_xray
+    ;;
+  2)
+    echo "Uninstalling Xray Core..."
+    uninstall_xray
+    ;;
+  3)
+    echo "Exiting..."
+    exit 0
+    ;;
+  *)
+    echo "Invalid option. Please select a valid option."
+    ;;
+esac
