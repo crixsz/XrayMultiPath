@@ -1,5 +1,5 @@
 clear
-echo "[ Xray Core Installation Script ]"
+echo "[ Xray Multipath Installation Script ]"
 echo "1) Install Xray Core + Acme.sh + Nginx"
 echo "2) Uninstall Xray Core + Acme.sh + Nginx"
 echo "3) Exit"
@@ -22,7 +22,47 @@ case $option in
     echo "Invalid option. Please select a valid option."
     ;;
 esac
-
+setup_nginx(){
+  clear
+  echo "[Nginx Installation Script]"
+  echo -e "Installing Nginx..."
+  apt-get install -y nginx
+  clear
+  #setup nginx config for xray (nginx.conf and xray.conf)
+  echo -e "Configuring Nginx for Xray..."
+  wget -O /etc/nginx.conf https://raw.githubusercontent.com/Crixsz/XrayMultiPath/main/Nginx/nginx.conf
+  wget -O /etc/nginx/conf.d/xray.conf https://raw.githubusercontent.com/Crixsz/XrayMultiPath/main/Nginx/xray.conf
+  systemctl restart nginx
+  nginx_status=$(systemctl is-active nginx)
+  if [ "$nginx_status" == "active" ]; then
+    echo "Configured successfully"
+    sleep 2
+  else
+    echo "Nginx is not running."
+  fi
+}
+acme_install(){
+  clear
+  echo "[Acme.sh Installation Script]"
+  echo -n "Enter your domain name (Ex:something.com): "
+  read domain
+  clear
+  echo -e "Generating cert for Xray...."
+  wget -O acme.sh https://raw.githubusercontent.com/acmesh-official/acme.sh/master/acme.sh
+  bash acme.sh --install
+  rm acme.sh
+  cd .acme.sh
+  bash acme.sh --register-account -m mymail@gmail.com
+  bash acme.sh --issue --standalone -d $domain --force
+  bash acme.sh --installcert -d $domain --fullchainpath /root/xray.crt --keypath /root/xray.key
+  clear
+  if [ -f /root/xray.crt ] && [ -f /root/xray.key ]; then
+    echo "Cert generated successfully !!"
+  else
+    echo "Cert generation failed !!"
+    exit 0
+  fi
+}
 install_xray() {
   # check if already exist
   if [ -f /usr/local/bin/xray ]; then
@@ -44,13 +84,26 @@ install_xray() {
   sleep 2 
   clear
   echo "Xray Core installed successfully !!"
-  echo "Starting installation of Acme.sh.."
-  sleep 3
-  
+  sleep 2
+  clear 
+  wget https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Xray/xraymulticontroller.sh && mv xraymulticontroller.sh /usr/local/bin/xraymulticontroller && chmod +x /usr/local/bin/xraymulticontroller
+  wget https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Xray/config.json && mv config.json /usr/local/etc/xray/
+  wget https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Xray/none.json && mv none.json /usr/local/etc/xray/
+  if [ -f /usr/local/etc/xray/config.json ] && [ -f /usr/local/etc/xray/none.json ]; then
+    echo "Successfully configured Xray config"
+  else
+    echo "Xray config file download failed !!"
+    exit 0
+  fi
+  clear
+  systemctl stop xray
+  systemctl disable xray
+  clear
+  sleep 2
+  xraymulticontroller
 }
 
 uninstall_xray(){
   bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ remove --purge  
   clear 
   echo "Xray Core uninstalled successfully !!"
-}

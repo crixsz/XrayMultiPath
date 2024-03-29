@@ -1,0 +1,214 @@
+{
+    "log": {
+      "access": "/var/log/xray/access.log",
+      "error": "/var/log/xray/error.log",
+      "loglevel": "info"
+    },
+    "inbounds": [
+      {
+        "listen": "127.0.0.1",
+        "port": 10085,
+        "protocol": "dokodemo-door",
+        "settings": {
+          "address": "127.0.0.1"
+        },
+        "tag": "api"
+      },
+      {
+        "port": 443,
+        "protocol": "vless",
+        "settings": {
+          "clients": [
+            {
+              "id": "b654d3a9-ffaf-42ae-9ace-39aaf74775a2",
+              "flow": "xtls-rprx-direct",
+              "level": 0,
+              "email": ""
+    #xtls
+            }
+          ],
+          "decryption": "none",
+          "fallbacks": [
+            {
+              "dest": 1310,
+              "xver": 1
+            },
+            {
+              "path": "/vmess-ws",
+              "dest": 1311,
+              "xver": 1
+            },
+            {
+              "path": "/trojan-ws",
+              "dest": 1313,
+              "xver": 1
+            }
+          ]
+        },
+        "streamSettings": {
+          "network": "tcp",
+          "security": "xtls",
+          "xtlsSettings": {
+            "alpn": [
+              "http/1.1"
+            ],
+            "certificates": [
+              {
+                "certificateFile": "/root/xray.crt",
+                "keyFile": "/root/xray.key"
+              }
+            ],
+            "minVersion": "1.2",
+            "cipherSuites": "TLS_AES_256_GCM_SHA384:TLS_AES_128_GCM_SHA256:TLS_CHACHA20_POLY1305_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+          }
+        }
+      },
+      {
+        "port": 1311,
+        "listen": "127.0.0.1",
+        "protocol": "vmess",
+        "settings": {
+          "clients": [
+            {
+              "id": "b654d3a9-ffaf-42ae-9ace-39aaf74775a2",
+              "alterId": 0,
+              "level": 0,
+              "email": ""
+    #vmtls
+    #~& aku 2025-05-03
+            },
+            {
+              "id": "5d871382-b2ec-4d82-b5b8-712498a348e5",
+              "alterId": 0,
+              "email": "aku"
+            }
+          ]
+        },
+        "streamSettings": {
+          "network": "ws",
+          "security": "none",
+          "wsSettings": {
+            "acceptProxyProtocol": true,
+            "path": "/vmess-ws"
+          }
+        }
+      },
+      {
+        "port": 1313,
+        "listen": "127.0.0.1",
+        "protocol": "trojan",
+        "settings": {
+          "clients": [
+            {
+              "password": "b654d3a9-ffaf-42ae-9ace-39aaf74775a2",
+              "level": 0,
+              "email": ""
+    #trtls
+            }
+          ],
+          "decryption": "none"
+        },
+        "streamSettings": {
+          "network": "ws",
+          "wsSettings": {
+            "acceptProxyProtocol": true,
+            "path": "/trojan-ws"
+          }
+        }
+      },
+      {
+        "port": 1310,
+        "listen": "127.0.0.1",
+        "protocol": "trojan",
+        "settings": {
+          "clients": [
+            {
+              "id": "b654d3a9-ffaf-42ae-9ace-39aaf74775a2",
+              "password": "xxxxx"
+    #tr
+            }
+          ],
+          "fallbacks": [
+            {
+              "dest": 80
+            }
+          ]
+        },
+        "streamSettings": {
+          "network": "tcp",
+          "security": "none",
+          "tcpSettings": {
+            "acceptProxyProtocol": true
+          }
+        }
+      }
+    ],
+    "outbounds": [
+      {
+        "protocol": "freedom",
+        "settings": {}
+      },
+      {
+        "protocol": "blackhole",
+        "settings": {},
+        "tag": "blocked"
+      }
+    ],
+    "routing": {
+      "rules": [
+        {
+          "type": "field",
+          "ip": [
+            "0.0.0.0/8",
+            "10.0.0.0/8",
+            "100.64.0.0/10",
+            "169.254.0.0/16",
+            "172.16.0.0/12",
+            "192.0.0.0/24",
+            "192.0.2.0/24",
+            "192.168.0.0/16",
+            "198.18.0.0/15",
+            "198.51.100.0/24",
+            "203.0.113.0/24",
+            "::1/128",
+            "fc00::/7",
+            "fe80::/10"
+          ],
+          "outboundTag": "blocked"
+        },
+        {
+          "inboundTag": [
+            "api"
+          ],
+          "outboundTag": "api",
+          "type": "field"
+        },
+        {
+          "type": "field",
+          "outboundTag": "blocked",
+          "protocol": [
+            "bittorrent"
+          ]
+        }
+      ]
+    },
+    "stats": {},
+    "api": {
+      "services": [
+        "StatsService"
+      ],
+      "tag": "api"
+    },
+    "policy": {
+      "levels": {
+        "0": {
+          "statsUserDownlink": true,
+          "statsUserUplink": true
+        }
+      },
+      "system": {
+        "statsInboundUplink": true,
+        "statsInboundDownlink": true
+      }
+    }
+  }
