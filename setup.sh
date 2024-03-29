@@ -2,6 +2,7 @@
 prequisites(){
   clear
   apt install curl -y
+  apt install socat -y
 }
 setup_nginx(){
   clear
