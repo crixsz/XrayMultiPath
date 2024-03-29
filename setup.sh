@@ -30,8 +30,8 @@ setup_nginx(){
   clear
   #setup nginx config for xray (nginx.conf and xray.conf)
   echo -e "Configuring Nginx for Xray..."
-  wget -O /etc/nginx.conf https://raw.githubusercontent.com/Crixsz/XrayMultiPath/main/Nginx/nginx.conf
-  wget -O /etc/nginx/conf.d/xray.conf https://raw.githubusercontent.com/Crixsz/XrayMultiPath/main/Nginx/xray.conf
+  wget -O /etc/nginx.conf https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Nginx/nginx.conf
+  wget -O /etc/nginx/conf.d/xray.conf https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Nginx/xray.conf
   systemctl restart nginx
   nginx_status=$(systemctl is-active nginx)
   if [ "$nginx_status" == "active" ]; then
@@ -99,7 +99,7 @@ install_xray() {
   systemctl stop xray
   if pgrep xray >/dev/null; then
     echo "Xray is still running. Exiting..."
-exit 0
+    exit 0
   fi
   systemctl disable xray
   clear
