@@ -106,6 +106,8 @@ read -p "Select an option [1-3]: " option
 case $option in
   1)
     prequisites
+    acme_install
+    setup_nginx
     install_xray
     ;;
   2)
