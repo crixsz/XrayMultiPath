@@ -1,9 +1,13 @@
 ### Functions
+prequisites(){
+  clear
+  apt install curl -y
+}
 setup_nginx(){
   clear
   echo "[Nginx Installation Script]"
   echo -e "Installing Nginx..."
-  apt-get install -y nginx
+  apt-get install nginx -y
   clear
   #setup nginx config for xray (nginx.conf and xray.conf)
   echo -e "Configuring Nginx for Xray..."
@@ -101,6 +105,7 @@ read -p "Select an option [1-3]: " option
 
 case $option in
   1)
+    prequisites
     install_xray
     ;;
   2)
