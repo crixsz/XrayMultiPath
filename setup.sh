@@ -1,9 +1,14 @@
 ### Functions
-prequisites(){
+prequisites()
+{
   clear
   apt install curl -y
   apt install socat -y
+  apt install screen -y
+  apt install net-tools -y
+  apt install htop -y
 }
+
 setup_nginx(){
   clear
   echo "[Nginx Installation Script]"
@@ -12,6 +17,7 @@ setup_nginx(){
   clear
   #setup nginx config for xray (nginx.conf and xray.conf)
   echo -e "Configuring Nginx for Xray..."
+  rm -rf /etc/nginx.conf
   wget -O /etc/nginx.conf https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Nginx/nginx.conf
   wget -O /etc/nginx/conf.d/xray.conf https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Nginx/xray.conf
   systemctl restart nginx
