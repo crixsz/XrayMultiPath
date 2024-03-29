@@ -28,7 +28,7 @@ echo -e "1) Start"
 echo -e "2) Stop"
 echo -e "3) Restart"
 echo ""
-read -p "Select an option [1-3]: " option
+read -p "Select an option [1-3]: " action
 
 echo ""
 
