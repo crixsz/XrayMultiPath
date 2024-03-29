@@ -89,7 +89,7 @@ uninstall_xray(){
   clear 
   echo "Xray Core uninstalled successfully !!"
 
-
+}
 ## Main output
 clear
 echo "[ Xray Multipath Installation Script ]"
