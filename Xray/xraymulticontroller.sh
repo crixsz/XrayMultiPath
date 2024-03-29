@@ -17,19 +17,18 @@ function kill_xray() {
 clear
 echo -e "[Xray controller]" 
 echo -e "================="
-echo -e " Status:
+echo -e "Status:"
 if pgrep xray >/dev/null; then
-    echo "Xray is running."
+    echo "[RUNNING]"
 else
-    echo "Xray is not running."
+    echo "[NOT RUNNING]"
 fi
-echo -e "Choose between the option:"
+echo ""
 echo -e "1) Start"
 echo -e "2) Stop"
 echo -e "3) Restart"
 echo ""
-
-read action
+read -p "Select an option [1-3]: " option
 
 echo ""
 
