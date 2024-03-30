@@ -100,6 +100,12 @@ install_xray() {
 
 uninstall_xray(){
   bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ remove --purge  
+  sudo apt-get purge nginx nginx-common
+  rm -rf /etc/nginx
+  rm -rf /usr/local/etc/xray
+  rm -rf /etc/systemd/system/xray.service
+  rm -rf /etc/systemd/system/xray@.service
+  rm -rf /usr/local/bin/xraymulticontroller
   clear 
   echo "Xray Core uninstalled successfully !!"
 
@@ -121,7 +127,7 @@ case $option in
     install_xray
     ;;
   2)
-    echo "Uninstalling Xray Core..."
+    echo "Uninstalling All related files..."
     uninstall_xray
     ;;
   3)
