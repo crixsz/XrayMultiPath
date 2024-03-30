@@ -129,6 +129,10 @@
               "id": "b654d3a9-ffaf-42ae-9ace-39aaf74775a2",
               "password": "xxxxx"
     #tr
+            },
+            {
+              "id": "aku",
+              "password": "trojanaku"
             }
           ],
           "fallbacks": [
