@@ -65,7 +65,7 @@
             "streamSettings": {
                 "network": "ws",
                 "wsSettings": {
-                    "path": "/trojan-ws"
+                    "path": "/"
                 }
             }
         }
