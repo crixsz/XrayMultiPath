@@ -115,6 +115,8 @@ uninstall_xray(){
   rm -rf /usr/local/etc/xray
   rm -rf /etc/systemd/system/xray.service
   rm -rf /etc/systemd/system/xray@.service
+  rm -rf /etc/systemd/system/xray@.service.d
+  rm -rf /etc/systemd/system/xray.service.d
   rm -rf /usr/local/bin/xraymulticontroller
   clear 
   echo "Xray Core uninstalled successfully !!"
