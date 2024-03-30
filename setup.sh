@@ -76,7 +76,7 @@ install_xray() {
   echo "Xray Core installed successfully !!"
   sleep 2
   clear 
-  wget https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Xray/xraymulticontroller.sh && mv xraymulticontroller.sh /usr/local/bin/xraymulticontroller && chmod +x /usr/local/bin/xraymulticontroller
+  #wget https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Xray/xraymulticontroller.sh && mv xraymulticontroller.sh /usr/local/bin/xraymulticontroller && chmod +x /usr/local/bin/xraymulticontroller
   wget https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Xray/config.json && mv config.json /usr/local/etc/xray/
   wget https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Xray/none.json && mv none.json /usr/local/etc/xray/
   if [ -f /usr/local/etc/xray/config.json ] && [ -f /usr/local/etc/xray/none.json ]; then
@@ -95,7 +95,7 @@ install_xray() {
   wget -O /etc/systemd/system/xray.service https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Xray/xray.service
   clear
   sleep 2
-  xraymulticontroller
+  #xraymulticontroller
 }
 
 uninstall_xray(){
