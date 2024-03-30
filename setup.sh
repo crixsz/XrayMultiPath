@@ -33,6 +33,14 @@ setup_nginx(){
 }
 acme_install(){
   clear
+  if [ -f /root/xray.crt ] && [ -f /root/xray.key ]; then
+    echo "Cert files already exist, proceeding to Xray installation..."
+    sleep 3
+    setup_nginx
+    install_xray
+  else
+    echo "Cert files not found, generating new cert..."
+  fi
   echo "[Acme.sh Installation Script]"
   echo -n "Enter your domain name (Ex:something.com): "
   read domain
