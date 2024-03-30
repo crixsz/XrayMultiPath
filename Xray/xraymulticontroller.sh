@@ -4,18 +4,20 @@
 function start_xray() {
   screen -dmS xray_primary bash -c "xray run -config /usr/local/etc/xray/config.json"
   screen -dmS xray_none bash -c "xray run -config /usr/local/etc/xray/none.json"
-  echo "Xray processes started in detached screen sessions."
+  systemctl restart nginx
+  echo "Xray processes started."
 }
 
 # Function to kill Xray processes
 function kill_xray() {
   pkill xray
+  systemctl stop nginx
   echo "Xray processes killed."
 }
 
 # Get user input
 clear
-echo -e "[Xray controller]" 
+echo -e "[Xray+Nginx controller]" 
 echo -e "================="
 echo -e "Status:"
 if pgrep xray >/dev/null; then
@@ -42,6 +44,7 @@ case "$action" in
     ;;
   3)
     kill_xray
+    sleep 2
     start_xray
     ;;
   *)
