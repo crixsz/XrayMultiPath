@@ -91,7 +91,8 @@ install_xray() {
     echo "Xray is still running. Exiting..."
     exit 0
   fi
-  systemctl disable xray
+  rm -rf /etc/systemd/system/xray.service
+  wget -O /etc/systemd/system/xray.service https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Xray/xray.service
   clear
   sleep 2
   xraymulticontroller
