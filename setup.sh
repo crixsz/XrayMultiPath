@@ -93,6 +93,8 @@ install_xray() {
   fi
   rm -rf /etc/systemd/system/xray.service
   wget -O /etc/systemd/system/xray.service https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Xray/xray.service
+  systemctl daemon-reload
+  systemctl restart xray
   clear
   sleep 2
   #xraymulticontroller
