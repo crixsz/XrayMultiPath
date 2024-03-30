@@ -110,8 +110,7 @@ install_xray() {
 
 uninstall_xray(){
   bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ remove --purge  
-  sudo apt-get purge nginx nginx-common
-  rm -rf /etc/nginx
+  apt-get purge nginx nginx-common
   rm -rf /usr/local/etc/xray
   rm -rf /etc/systemd/system/xray.service
   rm -rf /etc/systemd/system/xray@.service
