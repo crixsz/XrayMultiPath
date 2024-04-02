@@ -39,7 +39,7 @@
               "xver": 1
             },
             {
-              "path": "/trojan-ws",
+              "path": "/",
               "dest": 1313,
               "xver": 1
             }
