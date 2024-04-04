@@ -28,6 +28,7 @@ setup_nginx(){
     sleep 2
   else
     echo "Nginx is not running."
+    sleep 3
     exit 0
   fi
 }
@@ -38,6 +39,7 @@ acme_install(){
     sleep 3
     setup_nginx
     install_xray
+    exit 0
   else
     echo "Cert files not found, generating new cert..."
   fi
@@ -69,6 +71,7 @@ install_xray() {
     if [ "$uninstall_option" == "y" ]; then
       echo "Uninstalling currently installed Xray Core..."
       uninstall_xray
+      exit 0
     else
       echo "Exiting..."
       sleep 3
@@ -124,6 +127,7 @@ uninstall_xray(){
   rm -rf /usr/local/bin/xray
   clear 
   echo "Xray Core uninstalled successfully !!"
+  sleep 3
 
 }
 ## Main output
