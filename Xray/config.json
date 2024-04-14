@@ -41,8 +41,7 @@
           {
             "path": "/",
             "dest": 1313,
-            "xver": 1
-          },
+            "xver": 1          },
           {
             "path": "/vless-ws",
             "dest": 1312,
