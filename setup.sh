@@ -131,7 +131,8 @@ install_xray() {
 
 uninstall_xray(){
   bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ remove --purge  
-  apt-get purge nginx nginx-common -y
+  apt-get purge nginx nginx-common -y0
+  bash <(curl -fsSL git.io/warp.sh) uninstall
   systemctl reset-failed
   rm -rf /usr/local/etc/xray
   rm -rf /etc/systemd/system/xray.service
@@ -147,9 +148,9 @@ uninstall_xray(){
 }
 ## Main output
 clear
-echo "[ Xray Multipath Installation Script ]"
-echo "1) Install Xray Core + Acme.sh + Nginx"
-echo "2) Uninstall Xray Core + Acme.sh + Nginx"
+echo "[ Xray Multipath + CF Warp Installation Script ]"
+echo "1) Install Xray Core + Acme.sh + Nginx + CF Warp"
+echo "2) Uninstall Xray Core + Acme.sh + Nginx + CF Warp"
 echo "3) Exit"
 echo ""
 read -p "Select an option [1-3]: " option
