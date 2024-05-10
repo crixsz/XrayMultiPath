@@ -24,7 +24,7 @@
             "flow": "xtls-rprx-direct",
             "level": 0,
             "email": ""
-  #xtls
+    #xtls
           }
         ],
         "decryption": "none",
@@ -41,7 +41,8 @@
           {
             "path": "/",
             "dest": 1313,
-            "xver": 1          },
+            "xver": 1
+          },
           {
             "path": "/vless-ws",
             "dest": 1312,
@@ -78,7 +79,7 @@
             "alterId": 0,
             "level": 0,
             "email": ""
-  #vmtls
+    #vmtls
           },
           {
             "id": "5d871382-b2ec-4d82-b5b8-712498a348e5",
@@ -106,7 +107,7 @@
             "password": "b654d3a9-ffaf-42ae-9ace-39aaf74775a2",
             "level": 0,
             "email": ""
-  #trtls
+    #trtls
           },
           {
             "password": "trojankau",
@@ -124,28 +125,27 @@
       }
     },
     {
-    "port": 1312,
-    "listen": "127.0.0.1",
-    "protocol": "vless",
-    "settings": {
-      "clients": [
-        {
-          "id": "5d871382-b2ec-4d82-b5b8-712498a348e5",
-          "level": 0,
-          "email": ""
-#vltls
-        }
-      ],
-      "decryption": "none"
-    },
-    "streamSettings": {
-      "network": "ws",
-      "security": "none",
-      "wsSettings":
+      "port": 1312,
+      "listen": "127.0.0.1",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
           {
-            "acceptProxyProtocol": true,
-            "path": "/vless-ws"
+            "id": "5d871382-b2ec-4d82-b5b8-712498a348e5",
+            "level": 0,
+            "email": ""
+#vltls
           }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "none",
+        "wsSettings": {
+          "acceptProxyProtocol": true,
+          "path": "/vless-ws"
+        }
       }
     },
     {
@@ -157,7 +157,7 @@
           {
             "id": "b654d3a9-ffaf-42ae-9ace-39aaf74775a2",
             "password": "xxxxx"
-  #tr
+    #tr
           },
           {
             "id": "aku",
@@ -181,6 +181,7 @@
   ],
   "outbounds": [
     {
+      "tag": "Freedom",
       "protocol": "freedom",
       "settings": {}
     },
@@ -188,6 +189,19 @@
       "protocol": "blackhole",
       "settings": {},
       "tag": "blocked"
+    },
+    {
+      "tag": "warp",
+      "protocol": "socks",
+      "settings": {
+        "servers": [
+          {
+            "address": "127.0.0.1",
+            "port": 40000,
+            "users": []
+          }
+        ]
+      }
     }
   ],
   "routing": {
@@ -225,7 +239,20 @@
         "protocol": [
           "bittorrent"
         ]
-      }
+      },
+      {
+        "type": "field",
+        "domain": [
+            "google.com"
+        ],
+        "network": "udp,tcp",
+        "outboundTag": "Freedom"
+    },
+    {
+        "type": "field",
+        "network":"udp,tcp",
+        "outboundTag": "warp"
+    }
     ]
   },
   "stats": {},

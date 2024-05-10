@@ -96,6 +96,7 @@
     ],
     "outbounds": [
         {
+            "tag":"Freedom",
             "protocol": "freedom",
             "settings": {}
         },
@@ -103,6 +104,19 @@
             "protocol": "blackhole",
             "settings": {},
             "tag": "blocked"
+        },
+         {
+            "tag":"warp",
+            "protocol": "socks",
+            "settings": {
+                "servers": [
+                    {
+                        "address": "127.0.0.1",
+                        "port": 40000,
+                        "users": []
+                    }
+                ]
+            }
         }
     ],
     "routing": {
@@ -140,6 +154,19 @@
                 "protocol": [
                     "bittorrent"
                 ]
+            },
+            {
+                "type": "field",
+                "domain": [
+                    "google.com"
+                ],
+                "network": "udp,tcp",
+                "outboundTag": "Freedom"
+            },
+            {
+                "type": "field",
+                "network":"udp,tcp",
+                "outboundTag": "warp"
             }
         ]
     },

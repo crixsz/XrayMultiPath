@@ -8,7 +8,22 @@ prequisites()
   apt install net-tools -y
   apt install htop -y
 }
-
+setup_cf_warp(){
+  clear
+  echo "[CF Warp Setup]"
+  bash <(curl -fsSL git.io/warp.sh) install
+  bash <(curl -fsSL git.io/warp.sh) proxy
+  sleep 2
+  clear
+  bash <(curl -fsSL git.io/warp.sh) status
+  read -p "Continue? [y/n]: " continue_option
+  if [ "$continue_option" == "y" ]; then
+      install_xray
+  else
+    echo "Exiting..."
+    exit 0
+  fi
+}
 setup_nginx(){
   clear
   echo "[Nginx Installation Script]"
@@ -144,7 +159,7 @@ case $option in
     prequisites
     acme_install
     setup_nginx
-    install_xray
+    setup_cf_warp
     ;;
   2)
     echo "Uninstalling All related files..."
