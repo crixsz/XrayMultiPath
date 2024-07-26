@@ -7,6 +7,7 @@ prequisites()
   apt install screen -y
   apt install net-tools -y
   apt install htop -y
+  apt install cron -y
 }
 
 setup_nginx(){
