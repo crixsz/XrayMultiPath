@@ -10,12 +10,18 @@ prequisites()
 }
 setup_cf_warp(){
   clear
+  echo "[Docker Setup]"
+  wget https://raw.githubusercontent.com/crixsz/DockerInstall/main/docker-install.sh && chmod +x docker-install.sh && ./docker-install.sh
   echo "[CF Warp Setup]"
-  bash <(curl -fsSL git.io/warp.sh) install
-  bash <(curl -fsSL git.io/warp.sh) proxy
+  ## moving to https://github.com/aleskxyz/warp-svc
+  docker run -d --name=warp -e FAMILIES_MODE=off -e -p 127.0.0.1:1080:1080 -v ${PWD}/warp:/var/lib/cloudflare-warp ghcr.io/aleskxyz/warp-svc:latest
+  docker ps
+  sleep 5
+  ## bash <(curl -fsSL git.io/warp.sh) install (warp-cli currently causes SSH to disconnect)
+  ## bash <(curl -fsSL git.io/warp.sh) proxy (warp-cli currently causes SSH to disconnect)
   sleep 2
   clear
-  bash <(curl -fsSL git.io/warp.sh) status
+  ## bash <(curl -fsSL git.io/warp.sh) status (warp-cli currently causes SSH to disconnect)
   read -p "Continue? [y/n]: " continue_option
   if [ "$continue_option" == "y" ]; then
       install_xray
