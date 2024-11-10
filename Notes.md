@@ -1,4 +1,4 @@
-Notes about Xraycore (Dual CF Warp and Direct using different websocket path)
+## Notes about Xraycore (Dual CF Warp and Direct using different websocket path)
 
 - Can create new config and new Nginx config to route different rule like CF Warp and Freedom
 
@@ -182,3 +182,8 @@ Notes about Xraycore (Dual CF Warp and Direct using different websocket path)
 }
 
 ```
+
+
+## Xray Core (Support Custom Path)
+
+https://github.com/dharak36/Xray-core
