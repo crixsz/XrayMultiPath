@@ -14,7 +14,7 @@ setup_cf_warp(){
   wget https://raw.githubusercontent.com/crixsz/DockerInstall/main/docker-install.sh && chmod +x docker-install.sh && ./docker-install.sh
   echo "[CF Warp Setup]"
   ## moving to https://github.com/aleskxyz/warp-svc
-  docker run -d --name=warp -e FAMILIES_MODE=off -e -p 127.0.0.1:1080:1080 -v ${PWD}/warp:/var/lib/cloudflare-warp ghcr.io/aleskxyz/warp-svc:latest
+  docker run -d --name=warp -e FAMILIES_MODE=off -p 127.0.0.1:1080:1080 -v ${PWD}/warp:/var/lib/cloudflare-warp ghcr.io/aleskxyz/warp-svc:latest
   docker ps
   sleep 5
   ## bash <(curl -fsSL git.io/warp.sh) install (warp-cli currently causes SSH to disconnect)
