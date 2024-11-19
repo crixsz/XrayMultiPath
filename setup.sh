@@ -14,7 +14,7 @@ acme_install(){
     echo "Cert files already exist, proceeding to Xray installation..."
     sleep 3
     setup_nginx
-    install_xray
+    setup_cf_warp
     exit 0
   else
     echo "Cert files not found, generating new cert..."
