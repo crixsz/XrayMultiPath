@@ -74,7 +74,7 @@ acme_install(){
   rm acme.sh
   cd .acme.sh
   bash acme.sh --register-account -m mymail@gmail.com
-  bash acme.sh --issue --standalone -d $domain --force --debug 2
+  bash acme.sh --issue --standalone -d $domain --force
   if [ $? -ne 0 ]; then
     echo "Acme.sh unable to generate cert please try to check if your domain is correct, exiting..."
     exit 0
