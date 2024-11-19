@@ -149,6 +149,10 @@ install_xray() {
 }
 
 uninstall_xray(){
+  systemctl stop xray
+  systemctl stop xray@none
+  systemctl disable xray
+  systemctl disable xray@none
   bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ remove --purge  
   apt-get purge nginx nginx-common -y0
   # remove docker and all its container 
