@@ -156,6 +156,7 @@ uninstall_xray(){
   docker rmi -f $(docker images -a -q)
   docker system prune -a -f
   systemctl reset-failed
+  systemctl daemon-reload
   rm -rf /usr/local/etc/xray
   rm -rf /etc/systemd/system/xray.service
   rm -rf /etc/systemd/system/xray@.service
