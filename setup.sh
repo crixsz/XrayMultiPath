@@ -22,13 +22,8 @@ setup_cf_warp(){
   sleep 2
   clear
   ## bash <(curl -fsSL git.io/warp.sh) status (warp-cli currently causes SSH to disconnect)
-  read -p "Continue? [y/n]: " continue_option
-  if [ "$continue_option" == "y" ]; then
-      install_xray
-  else
-    echo "Exiting..."
-    exit 0
-  fi
+  echo "[Moving to Xray Installation]"
+  install_xray
 }
 setup_nginx(){
   clear
@@ -74,8 +69,17 @@ acme_install(){
   rm acme.sh
   cd .acme.sh
   bash acme.sh --register-account -m mymail@gmail.com
-  bash acme.sh --issue --standalone -d $domain --force
-  bash acme.sh --installcert -d $domain --fullchainpath /root/xray.crt --keypath /root/xray.key
+  bash acme.sh --issue --standalone -d $domain --force --debug 2
+  if [ $? -ne 0 ]; then
+    echo "Acme.sh unable to generate cert please try to check if your domain is correct, exiting..."
+    exit 0
+  else
+    bash acme.sh --installcert -d $domain --fullchainpath /root/xray.crt --keypath /root/xray.key
+    if [ $? -ne 0 ]; then
+      echo "Acme.sh unable to install cert please try to check if your domain is correct, exiting..."
+      exit 0
+    fi
+  fi
   clear
   if [ -f /root/xray.crt ] && [ -f /root/xray.key ]; then
     echo "Cert generated successfully !!"
@@ -100,6 +104,7 @@ install_xray() {
       exit 0
     fi
   fi
+  echo "[Xray Core Installation Script]"
   echo "Starting installation of xray core v1.5.0.."
   sleep 3
   bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install --version 1.5.0 -u root
@@ -138,7 +143,10 @@ install_xray() {
 uninstall_xray(){
   bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ remove --purge  
   apt-get purge nginx nginx-common -y0
-  bash <(curl -fsSL git.io/warp.sh) uninstall
+  # remove docker and all its container 
+  docker rm -f $(docker ps -a -q)
+  docker rmi -f $(docker images -a -q)
+  docker system prune -a -f
   systemctl reset-failed
   rm -rf /usr/local/etc/xray
   rm -rf /etc/systemd/system/xray.service
