@@ -187,3 +187,7 @@
 ## Xray Core (Support Custom Path)
 
 https://github.com/dharak36/Xray-core
+
+
+## AWS
+- After testing with AWS EC2 Singapore seems like it throttle the outbound speed, so the max speed that I got when using the cf-warp routing reach max speed of 15MB/s
