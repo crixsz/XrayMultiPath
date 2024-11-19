@@ -8,47 +8,6 @@ prequisites()
   apt install net-tools -y
   apt install htop -y
 }
-setup_cf_warp(){
-  clear
-  echo "[Docker Setup]"
-  wget https://raw.githubusercontent.com/crixsz/DockerInstall/main/docker-install.sh && chmod +x docker-install.sh && ./docker-install.sh
-  echo "[CF Warp Setup]"
-  ## moving to https://github.com/aleskxyz/warp-svc
-  docker run --restart always -d --name=warp -e FAMILIES_MODE=off -p 127.0.0.1:1080:1080 -v ${PWD}/warp:/var/lib/cloudflare-warp ghcr.io/aleskxyz/warp-svc:latest
-  docker ps
-  sleep 5
-  ## bash <(curl -fsSL git.io/warp.sh) install (warp-cli currently causes SSH to disconnect)
-  ## bash <(curl -fsSL git.io/warp.sh) proxy (warp-cli currently causes SSH to disconnect)
-  sleep 2
-  clear
-  ## bash <(curl -fsSL git.io/warp.sh) status (warp-cli currently causes SSH to disconnect)
-  echo "[Moving to Xray Installation]"
-  install_xray
-}
-setup_nginx(){
-  clear
-  echo "[Nginx Installation Script]"
-  echo -e "Installing Nginx..."
-  sleep 3
-  apt-get install nginx -y
-  clear
-  #setup nginx config for xray (nginx.conf and xray.conf)
-  echo -e "Configuring Nginx for Xray..."
-  rm -rf /etc/nginx/nginx.conf
-  sleep 2
-  wget -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/crixsz/XrayMultiPath/cf-warp/Nginx/nginx.conf
-  wget -O /etc/nginx/conf.d/xray.conf https://raw.githubusercontent.com/crixsz/XrayMultiPath/cf-warp/Nginx/xray.conf
-  systemctl restart nginx
-  nginx_status=$(systemctl is-active nginx)
-  if [ "$nginx_status" == "active" ]; then
-    echo "Configured successfully"
-    sleep 2
-  else
-    echo "Nginx is not running."
-    sleep 3
-    exit 0
-  fi
-}
 acme_install(){
   clear
   if [ -f /root/xray.crt ] && [ -f /root/xray.key ]; then
@@ -95,6 +54,47 @@ acme_install(){
     sleep 3
     exit 0
   fi
+}
+setup_nginx(){
+  clear
+  echo "[Nginx Installation Script]"
+  echo -e "Installing Nginx..."
+  sleep 3
+  apt-get install nginx -y
+  clear
+  #setup nginx config for xray (nginx.conf and xray.conf)
+  echo -e "Configuring Nginx for Xray..."
+  rm -rf /etc/nginx/nginx.conf
+  sleep 2
+  wget -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/crixsz/XrayMultiPath/cf-warp/Nginx/nginx.conf
+  wget -O /etc/nginx/conf.d/xray.conf https://raw.githubusercontent.com/crixsz/XrayMultiPath/cf-warp/Nginx/xray.conf
+  systemctl restart nginx
+  nginx_status=$(systemctl is-active nginx)
+  if [ "$nginx_status" == "active" ]; then
+    echo "Configured successfully"
+    sleep 2
+  else
+    echo "Nginx is not running."
+    sleep 3
+    exit 0
+  fi
+}
+setup_cf_warp(){
+  clear
+  echo "[Docker Setup]"
+  wget https://raw.githubusercontent.com/crixsz/DockerInstall/main/docker-install.sh && chmod +x docker-install.sh && ./docker-install.sh
+  echo "[CF Warp Setup]"
+  ## moving to https://github.com/aleskxyz/warp-svc
+  docker run --restart always -d --name=warp -e FAMILIES_MODE=off -p 127.0.0.1:1080:1080 -v ${PWD}/warp:/var/lib/cloudflare-warp ghcr.io/aleskxyz/warp-svc:latest
+  docker ps
+  sleep 5
+  ## bash <(curl -fsSL git.io/warp.sh) install (warp-cli currently causes SSH to disconnect)
+  ## bash <(curl -fsSL git.io/warp.sh) proxy (warp-cli currently causes SSH to disconnect)
+  sleep 2
+  clear
+  ## bash <(curl -fsSL git.io/warp.sh) status (warp-cli currently causes SSH to disconnect)
+  echo "[Moving to Xray Installation]"
+  install_xray
 }
 install_xray() {
   # check if already exist
@@ -197,3 +197,4 @@ case $option in
     echo "Invalid option. Please select a valid option."
     ;;
 esac
+
