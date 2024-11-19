@@ -66,6 +66,9 @@ acme_install(){
   read domain
   clear
   echo -e "Generating cert for Xray...."
+  echo -e "Installing Acme.sh..."
+  sleep 3
+  clear
   wget -O acme.sh https://raw.githubusercontent.com/acmesh-official/acme.sh/master/acme.sh
   bash acme.sh --install
   rm acme.sh
