@@ -58,6 +58,8 @@ acme_install(){
     exit 0
   else
     echo "Cert files not found, generating new cert..."
+    sleep 3
+    clear
   fi
   echo "[Acme.sh Installation Script]"
   echo -n "Enter your domain name (Ex:something.com): "
