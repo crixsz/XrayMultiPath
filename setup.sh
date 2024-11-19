@@ -29,6 +29,7 @@ setup_nginx(){
   clear
   echo "[Nginx Installation Script]"
   echo -e "Installing Nginx..."
+  sleep 3
   apt-get install nginx -y
   clear
   #setup nginx config for xray (nginx.conf and xray.conf)
@@ -88,8 +89,10 @@ acme_install(){
   clear
   if [ -f /root/xray.crt ] && [ -f /root/xray.key ]; then
     echo "Cert generated successfully !!"
+    sleep 3
   else
     echo "Cert generation failed !!"
+    sleep 3
     exit 0
   fi
 }
