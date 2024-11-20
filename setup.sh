@@ -166,8 +166,9 @@ uninstall_xray(){
   rm -rf /etc/systemd/system/xray@.service
   rm -rf /etc/systemd/system/xray@.service.d
   rm -rf /etc/systemd/system/xray.service.d
-  rm -rf /usr/local/bin/xraymulticontroller
+  rm -rf /root/docker-install.sh
   rm -rf /usr/local/bin/xray
+  rm -rf 
   clear 
   echo "Xray Core uninstalled successfully !!"
   sleep 3
