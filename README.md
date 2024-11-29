@@ -19,7 +19,7 @@ trojan://trojanaku@yourip:80?security=&type=ws&path=/trojan-ws&host=yourip#
 
 TROJAN-WS Port 443 (CF Warp)
 ```
-trojan://trojanaku@yourip:443?security=&type=ws&path=/trojan-ws&host=yourip#
+trojan://trojankau@yourip:443?security=&type=ws&path=/trojan-ws&host=yourip#
 ```
 
 TROJAN-WS Port 80 (Direct)
