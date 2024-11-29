@@ -1,7 +1,7 @@
 {
     "log": {
-        "access": "/var/log/xray/test_access.log",
-        "error": "/var/log/xray/test_error.log",
+        "access": "/var/log/xray/direct_access.log",
+        "error": "/var/log/xray/direct_error.log",
         "loglevel": "debug"
     },
     "inbounds": [
@@ -29,7 +29,7 @@
                     {
                         "password": "trojanaku",
                         "level": 0,
-                        "email": "testtrojan"
+                        "email": "directtrojan"
                     }
                 ],
                 "decryption": "none"
