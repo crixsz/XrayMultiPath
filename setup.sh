@@ -179,10 +179,10 @@ uninstall_xray(){
 }
 ## Main output
 clear
-echo -e "\033[0;34m[ Xray Multipath + CF Warp Installation Script ]\033[0m"
+echo -e "\033[0;34m[ Xray Dual Config Multipath + CF Warp Installation Script ]\033[0m"
 echo ""
-echo "1) Install Xray Core + Acme.sh + Nginx + CF Warp"
-echo "2) Uninstall Xray Core + Acme.sh + Nginx + CF Warp"
+echo "1) Install Xray Core (Dual config) + Acme.sh + Nginx + CF Warp"
+echo "2) Uninstall Xray Core (Dual config) + Acme.sh + Nginx + CF Warp"
 echo "3) Exit"
 echo ""
 read -p "Select an option [1-3]: " option
