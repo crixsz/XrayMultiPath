@@ -157,14 +157,6 @@
             },
             {
                 "type": "field",
-                "domain": [
-                    "google.com"
-                ],
-                "network": "udp,tcp",
-                "outboundTag": "Freedom"
-            },
-            {
-                "type": "field",
                 "network":"udp,tcp",
                 "outboundTag": "warp"
             }
