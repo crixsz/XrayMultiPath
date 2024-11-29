@@ -66,8 +66,8 @@ setup_nginx(){
   echo -e "Configuring Nginx for Xray..."
   rm -rf /etc/nginx/nginx.conf
   sleep 2
-  wget -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/crixsz/XrayMultiPath/cf-warp/Nginx/nginx.conf
-  wget -O /etc/nginx/conf.d/xray.conf https://raw.githubusercontent.com/crixsz/XrayMultiPath/cf-warp/Nginx/xray.conf
+  wget -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/crixsz/XrayMultiPath/dual-xray/Nginx/nginx.conf
+  wget -O /etc/nginx/conf.d/xray.conf https://raw.githubusercontent.com/crixsz/XrayMultiPath/dual-xray/Nginx/xray.conf
   systemctl restart nginx
   nginx_status=$(systemctl is-active nginx)
   if [ "$nginx_status" == "active" ]; then
@@ -124,8 +124,9 @@ install_xray() {
   sleep 2
   clear 
   #wget https://raw.githubusercontent.com/crixsz/XrayMultiPath/main/Xray/xraymulticontroller.sh && mv xraymulticontroller.sh /usr/local/bin/xraymulticontroller && chmod +x /usr/local/bin/xraymulticontroller
-  wget https://raw.githubusercontent.com/crixsz/XrayMultiPath/cf-warp/Xray/config.json && mv config.json /usr/local/etc/xray/
-  wget https://raw.githubusercontent.com/crixsz/XrayMultiPath/cf-warp/Xray/none.json && mv none.json /usr/local/etc/xray/
+  wget https://raw.githubusercontent.com/crixsz/XrayMultiPath/dual-xray/Xray/config.json && mv config.json /usr/local/etc/xray/
+  wget https://raw.githubusercontent.com/crixsz/XrayMultiPath/dual-xray/Xray/none.json && mv none.json /usr/local/etc/xray/
+  wget https://raw.githubusercontent.com/crixsz/XrayMultiPath/dual-xray/Xray/direct.json && mv direct.json /usr/local/etc/xray/
   if [ -f /usr/local/etc/xray/config.json ] && [ -f /usr/local/etc/xray/none.json ]; then
     echo "Successfully configured Xray config"
   else
@@ -139,7 +140,7 @@ install_xray() {
     exit 0
   fi
   rm -rf /etc/systemd/system/xray@.service
-  wget -O /etc/systemd/system/xray@.service https://raw.githubusercontent.com/crixsz/XrayMultiPath/cf-warp/Xray/xray@.service
+  wget -O /etc/systemd/system/xray@.service https://raw.githubusercontent.com/crixsz/XrayMultiPath/dual-xray/Xray/xray@.service
   systemctl daemon-reload
   systemctl start xray@none
   systemctl start xray
