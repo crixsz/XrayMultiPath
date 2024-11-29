@@ -144,8 +144,10 @@ install_xray() {
   systemctl daemon-reload
   systemctl start xray@none
   systemctl start xray
+  systemctl start xray@direct
   systemctl enable xray@none
   systemctl enable xray
+  systemctl enable xray@direct
   clear
   sleep 2
   #xraymulticontroller
