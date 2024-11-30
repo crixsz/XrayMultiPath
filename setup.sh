@@ -1,5 +1,6 @@
 ### Functions
-declare -g domain
+ip = $(curl -s ifconfig.me)
+
 prequisites()
 {
   clear
@@ -154,19 +155,19 @@ install_xray() {
   echo "Xray Core installed successfully !!"
   echo ""
   echo -e "\033[0;32m[ VLESS-WS Port 80 (CF Warp) ]\033[0m"
-  echo "vless://${domain}:80?security=&type=ws&path=/vless-ws&host=${domain}&encryption=none"
+  echo "vless://${ip}:80?security=&type=ws&path=/vless-ws&host=${ip}&encryption=none"
   echo ""
   echo -e "\033[0;32m[ VLESS-WS Port 443 (CF Warp) ]\033[0m"
-  echo "vless://${domain}:443?security=tls&sni=bug.com&allowInsecure=1&type=ws&path=/vless-ws&encryption=none"
+  echo "vless://${ip}:443?security=tls&sni=bug.com&allowInsecure=1&type=ws&path=/vless-ws&encryption=none"
   echo ""  
   echo -e "\033[0;32m[ TROJAN-WS Port 80 (CF Warp) ]\033[0m"
-  echo "trojan://trojanaku@${domain}:80?security=&type=ws&path=/trojan-ws&host=${domain}#"
+  echo "trojan://trojanaku@${ip}:80?security=&type=ws&path=/trojan-ws&host=${ip}#"
   echo ""
   echo -e "\033[0;32m[ TROJAN-WS Port 443 (CF Warp) ]\033[0m"
-  echo "trojan://trojankau@${domain}:443?security=&type=ws&path=/trojan-ws&host=${domain}#"
+  echo "trojan://trojankau@${ip}:443?security=&type=ws&path=/trojan-ws&host=${ip}#"
   echo ""
   echo -e "\033[0;32m[ TROJAN-WS Port 80 (Direct) ]\033[0m"
-  echo "trojan://trojanaku@${domain}:80?security=&type=ws&path=/direct&host=${domain}#"
+  echo "trojan://trojanaku@${ip}:80?security=&type=ws&path=/direct&host=${ip}#"
   echo ""
 
 }
