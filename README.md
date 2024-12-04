@@ -4,7 +4,7 @@ This script will install Xray Core, Nginx, Docker(with warp container). It will 
 
 VLESS-WS Port 80 (CF Warp)
 ```
-vless://baeddecc-db89-4ee2-9672-1cdbfd43e6d4@yourip:80?security=&type=ws&path=/vless-ws&host=yourip&encryption=none
+vless://5d871382-b2ec-4d82-b5b8-712498a348e5@yourip:80?security=&type=ws&path=/vless-ws&host=yourip&encryption=none
 ```
 
 VLESS-WS Port 443 (CF Warp)
