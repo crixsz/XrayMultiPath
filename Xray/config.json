@@ -24,7 +24,6 @@
             "flow": "xtls-rprx-direct",
             "level": 0,
             "email": ""
-  #xtls
           }
         ],
         "decryption": "none",
@@ -41,7 +40,8 @@
           {
             "path": "/trojan-ws",
             "dest": 1313,
-            "xver": 1          },
+            "xver": 1
+          },
           {
             "path": "/vless-ws",
             "dest": 1312,
@@ -53,9 +53,7 @@
         "network": "tcp",
         "security": "xtls",
         "xtlsSettings": {
-          "alpn": [
-            "http/1.1"
-          ],
+          "alpn": ["http/1.1"],
           "certificates": [
             {
               "certificateFile": "/root/xray.crt",
@@ -78,7 +76,6 @@
             "alterId": 0,
             "level": 0,
             "email": ""
-  #vmtls
           },
           {
             "id": "5d871382-b2ec-4d82-b5b8-712498a348e5",
@@ -106,7 +103,6 @@
             "password": "b654d3a9-ffaf-42ae-9ace-39aaf74775a2",
             "level": 0,
             "email": ""
-  #trtls
           },
           {
             "password": "trojankau",
@@ -124,28 +120,26 @@
       }
     },
     {
-    "port": 1312,
-    "listen": "127.0.0.1",
-    "protocol": "vless",
-    "settings": {
-      "clients": [
-        {
-          "id": "5d871382-b2ec-4d82-b5b8-712498a348e5",
-          "level": 0,
-          "email": ""
-#vltls
-        }
-      ],
-      "decryption": "none"
-    },
-    "streamSettings": {
-      "network": "ws",
-      "security": "none",
-      "wsSettings":
+      "port": 1312,
+      "listen": "127.0.0.1",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
           {
-            "acceptProxyProtocol": true,
-            "path": "/vless-ws"
+            "id": "5d871382-b2ec-4d82-b5b8-712498a348e5",
+            "level": 0,
+            "email": ""
           }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "none",
+        "wsSettings": {
+          "acceptProxyProtocol": true,
+          "path": "/vless-ws"
+        }
       }
     },
     {
@@ -157,7 +151,6 @@
           {
             "id": "b654d3a9-ffaf-42ae-9ace-39aaf74775a2",
             "password": "xxxxx"
-  #tr
           },
           {
             "id": "aku",
@@ -213,26 +206,20 @@
         "outboundTag": "blocked"
       },
       {
-        "inboundTag": [
-          "api"
-        ],
+        "inboundTag": ["api"],
         "outboundTag": "api",
         "type": "field"
       },
       {
         "type": "field",
         "outboundTag": "blocked",
-        "protocol": [
-          "bittorrent"
-        ]
+        "protocol": ["bittorrent"]
       }
     ]
   },
   "stats": {},
   "api": {
-    "services": [
-      "StatsService"
-    ],
+    "services": ["StatsService"],
     "tag": "api"
   },
   "policy": {
