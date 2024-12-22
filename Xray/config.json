@@ -24,7 +24,6 @@
             "flow": "xtls-rprx-direct",
             "level": 0,
             "email": ""
-    #xtls
           }
         ],
         "decryption": "none",
@@ -54,9 +53,7 @@
         "network": "tcp",
         "security": "xtls",
         "xtlsSettings": {
-          "alpn": [
-            "http/1.1"
-          ],
+          "alpn": ["http/1.1"],
           "certificates": [
             {
               "certificateFile": "/root/xray.crt",
@@ -79,7 +76,6 @@
             "alterId": 0,
             "level": 0,
             "email": ""
-    #vmtls
           },
           {
             "id": "5d871382-b2ec-4d82-b5b8-712498a348e5",
@@ -107,7 +103,6 @@
             "password": "b654d3a9-ffaf-42ae-9ace-39aaf74775a2",
             "level": 0,
             "email": ""
-    #trtls
           },
           {
             "password": "trojankau",
@@ -134,7 +129,6 @@
             "id": "5d871382-b2ec-4d82-b5b8-712498a348e5",
             "level": 0,
             "email": ""
-#vltls
           }
         ],
         "decryption": "none"
@@ -157,7 +151,6 @@
           {
             "id": "b654d3a9-ffaf-42ae-9ace-39aaf74775a2",
             "password": "xxxxx"
-    #tr
           },
           {
             "id": "aku",
@@ -227,39 +220,31 @@
         "outboundTag": "blocked"
       },
       {
-        "inboundTag": [
-          "api"
-        ],
+        "inboundTag": ["api"],
         "outboundTag": "api",
         "type": "field"
       },
       {
         "type": "field",
         "outboundTag": "blocked",
-        "protocol": [
-          "bittorrent"
-        ]
+        "protocol": ["bittorrent"]
       },
       {
         "type": "field",
-        "domain": [
-            "google.com"
-        ],
+        "domain": ["google.com"],
         "network": "udp,tcp",
         "outboundTag": "Freedom"
-    },
-    {
+      },
+      {
         "type": "field",
-        "network":"udp,tcp",
+        "network": "udp,tcp",
         "outboundTag": "warp"
-    }
+      }
     ]
   },
   "stats": {},
   "api": {
-    "services": [
-      "StatsService"
-    ],
+    "services": ["StatsService"],
     "tag": "api"
   },
   "policy": {

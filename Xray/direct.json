@@ -1,166 +1,153 @@
 {
-    "log": {
-        "access": "/var/log/xray/direct_access.log",
-        "error": "/var/log/xray/direct_error.log",
-        "loglevel": "debug"
+  "log": {
+    "access": "/var/log/xray/direct_access.log",
+    "error": "/var/log/xray/direct_error.log",
+    "loglevel": "debug"
+  },
+  "inbounds": [
+    {
+      "listen": "127.0.0.1",
+      "port": 10082,
+      "protocol": "dokodemo-door",
+      "settings": {
+        "address": "127.0.0.1"
+      },
+      "tag": "api"
     },
-    "inbounds": [
-        {
-            "listen": "127.0.0.1",
-            "port": 10082,
-            "protocol": "dokodemo-door",
-            "settings": {
-                "address": "127.0.0.1"
-            },
-            "tag": "api"
-        },
-        {
-            "port": 1214,
-            "listen": "127.0.0.1",
-            "protocol": "trojan",
-            "settings": {
-                "clients": [
-                    {
-                        "password": "b654d3a9-ffaf-42ae-9ace-39aaf74775a2",
-                        "level": 0,
-                        "email": ""
-                    },
-                    {
-                        "password": "trojanaku",
-                        "level": 0,
-                        "email": "directtrojan"
-                    }
-                ],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "ws",
-                "wsSettings": {
-                    "path": "/direct"
-                }
-            }
-        },
-        {
-            "port": 1215,
-            "listen": "127.0.0.1",
-            "protocol": "vless",
-            "settings": {
-              "clients": [
-                {
-                  "id": "5d871382-b2ec-4d82-b5b8-712498a348e5",
-                  "level": 0,
-                  "email": ""
-                }
-              ],
-              "decryption": "none"
-            },
-            "streamSettings": {
-              "network": "ws",
-              "security": "none",
-              "wsSettings":
-                  {
-                    "path": "/direct-vless"
-                  }
-              }
-              }
-    ],
-    "outbounds": [
-        {
-            "tag":"Freedom",
-            "protocol": "freedom",
-            "settings": {}
-        },
-        {
-            "protocol": "blackhole",
-            "settings": {},
-            "tag": "blocked"
-        },
-         {
-            "tag":"warp",
-            "protocol": "socks",
-            "settings": {
-                "servers": [
-                    {
-                        "address": "127.0.0.1",
-                        "port": 1080,
-                        "users": []
-                    }
-                ]
-            }
-        }
-    ],
-    "routing": {
-        "rules": [
-            {
-                "type": "field",
-                "ip": [
-                    "0.0.0.0/8",
-                    "10.0.0.0/8",
-                    "100.64.0.0/10",
-                    "169.254.0.0/16",
-                    "172.16.0.0/12",
-                    "192.0.0.0/24",
-                    "192.0.2.0/24",
-                    "192.168.0.0/16",
-                    "198.18.0.0/15",
-                    "198.51.100.0/24",
-                    "203.0.113.0/24",
-                    "::1/128",
-                    "fc00::/7",
-                    "fe80::/10"
-                ],
-                "outboundTag": "blocked"
-            },
-            {
-                "inboundTag": [
-                    "api"
-                ],
-                "outboundTag": "api",
-                "type": "field"
-            },
-            {
-                "type": "field",
-                "outboundTag": "blocked",
-                "protocol": [
-                    "bittorrent"
-                ]
-            },
-            {
-                "type": "field",
-                "network":"udp,tcp",
-                "outboundTag": "Freedom"
-            },
-            {
-                "type": "field",
-                "outboundTag": "warp",
-                "domain":[
-                    "reddit.com",
-                    "youtube.com",
-                    "xdaforums.com",
-                    "ifconfig.me"
-                ],
-                "network": "udp,tcp"
-
-            }
-        ]
-    },
-    "stats": {},
-    "api": {
-        "services": [
-            "StatsService"
+    {
+      "port": 1214,
+      "listen": "127.0.0.1",
+      "protocol": "trojan",
+      "settings": {
+        "clients": [
+          {
+            "password": "b654d3a9-ffaf-42ae-9ace-39aaf74775a2",
+            "level": 0,
+            "email": ""
+          },
+          {
+            "password": "trojanaku",
+            "level": 0,
+            "email": "directtrojan"
+          }
         ],
-        "tag": "api"
-    },
-    "policy": {
-        "levels": {
-            "0": {
-                "statsUserDownlink": true,
-                "statsUserUplink": true
-            }
-        },
-        "system": {
-            "statsInboundUplink": true,
-            "statsInboundDownlink": true
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/direct"
         }
+      }
+    },
+    {
+      "port": 1215,
+      "listen": "127.0.0.1",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "5d871382-b2ec-4d82-b5b8-712498a348e5",
+            "level": 0,
+            "email": ""
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "none",
+        "wsSettings": {
+          "path": "/direct-vless"
+        }
+      }
     }
+  ],
+  "outbounds": [
+    {
+      "tag": "Freedom",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
+    },
+    {
+      "tag": "warp",
+      "protocol": "socks",
+      "settings": {
+        "servers": [
+          {
+            "address": "127.0.0.1",
+            "port": 1080,
+            "users": []
+          }
+        ]
+      }
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "ip": [
+          "0.0.0.0/8",
+          "10.0.0.0/8",
+          "100.64.0.0/10",
+          "169.254.0.0/16",
+          "172.16.0.0/12",
+          "192.0.0.0/24",
+          "192.0.2.0/24",
+          "192.168.0.0/16",
+          "198.18.0.0/15",
+          "198.51.100.0/24",
+          "203.0.113.0/24",
+          "::1/128",
+          "fc00::/7",
+          "fe80::/10"
+        ],
+        "outboundTag": "blocked"
+      },
+      {
+        "inboundTag": ["api"],
+        "outboundTag": "api",
+        "type": "field"
+      },
+      {
+        "type": "field",
+        "outboundTag": "blocked",
+        "protocol": ["bittorrent"]
+      },
+      {
+        "type": "field",
+        "network": "udp,tcp",
+        "outboundTag": "Freedom"
+      },
+      {
+        "type": "field",
+        "outboundTag": "warp",
+        "domain": ["reddit.com", "youtube.com", "xdaforums.com", "ifconfig.me"],
+        "network": "udp,tcp"
+      }
+    ]
+  },
+  "stats": {},
+  "api": {
+    "services": ["StatsService"],
+    "tag": "api"
+  },
+  "policy": {
+    "levels": {
+      "0": {
+        "statsUserDownlink": true,
+        "statsUserUplink": true
+      }
+    },
+    "system": {
+      "statsInboundUplink": true,
+      "statsInboundDownlink": true
+    }
+  }
 }
