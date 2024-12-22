@@ -24,7 +24,6 @@
                         "password": "b654d3a9-ffaf-42ae-9ace-39aaf74775a2",
                         "level": 0,
                         "email": ""
-  #trtls
                     },
                     {
                         "password": "trojanaku",
@@ -40,7 +39,30 @@
                     "path": "/direct"
                 }
             }
-        }
+        },
+        {
+            "port": 1215,
+            "listen": "127.0.0.1",
+            "protocol": "vless",
+            "settings": {
+              "clients": [
+                {
+                  "id": "5d871382-b2ec-4d82-b5b8-712498a348e5",
+                  "level": 0,
+                  "email": ""
+                }
+              ],
+              "decryption": "none"
+            },
+            "streamSettings": {
+              "network": "ws",
+              "security": "none",
+              "wsSettings":
+                  {
+                    "path": "/direct-vless"
+                  }
+              }
+              }
     ],
     "outbounds": [
         {

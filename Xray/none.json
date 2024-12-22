@@ -43,7 +43,7 @@
             }
         },
         {
-              "port": 1212,
+      "port": 1212,
       "listen": "127.0.0.1",
       "protocol": "vless",
       "settings": {

@@ -27,6 +27,12 @@ TROJAN-WS Port 80 (Direct)
 trojan://trojanaku@yourip:80?security=&type=ws&path=/direct&host=yourip#
 ```
 
+VLESS-WS Port 80 (Direct)
+```
+vless://5d871382-b2ec-4d82-b5b8-712498a348e5@yourip:80?security=&type=ws&path=/direct-vless&host=yourip&encryption=none
+```
+
+
 # Installation Link
 ```
 wget https://raw.githubusercontent.com/crixsz/XrayMultiPath/dual-xray/setup.sh && chmod +x setup.sh && bash setup.sh
