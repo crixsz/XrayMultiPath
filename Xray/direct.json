@@ -36,7 +36,7 @@
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "/direct"
+          "path": "/direct-trojan"
         }
       }
     },
