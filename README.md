@@ -24,7 +24,7 @@ trojan://trojanaku@yourip:443?security=&type=ws&path=/trojan-ws&host=yourip#
 
 TROJAN-WS Port 80 (Direct)
 ```
-trojan://trojanaku@yourip:80?security=&type=ws&path=/direct&host=yourip#
+trojan://trojanaku@yourip:80?security=&type=ws&path=/direct-trojan&host=yourip#
 ```
 
 VLESS-WS Port 80 (Direct)
