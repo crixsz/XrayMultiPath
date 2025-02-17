@@ -1,5 +1,5 @@
 ### Functions
-ip=$(curl -s ipv4.icanhazip.com)
+export ip=$(curl -s ipv4.icanhazip.com || curl -s ifconfig.me)
 
 prequisites()
 {
