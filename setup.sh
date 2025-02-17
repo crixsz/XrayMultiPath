@@ -1,7 +1,5 @@
 ### Functions
-ip = $(curl -s ifconfig.me)
-
-export ip
+ip=$(curl -s ipv4.icanhazip.com)
 
 prequisites()
 {
