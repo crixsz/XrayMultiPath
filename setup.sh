@@ -1,6 +1,8 @@
 ### Functions
 ip = $(curl -s ifconfig.me)
 
+export ip
+
 prequisites()
 {
   clear
@@ -34,7 +36,7 @@ acme_install(){
   wget -O acme.sh https://raw.githubusercontent.com/acmesh-official/acme.sh/master/acme.sh
   bash acme.sh --install
   rm acme.sh
-  cd .acme.sh
+  cd .acme.sh 
   bash acme.sh --register-account -m mymail@gmail.com
   bash acme.sh --issue --standalone -d $domain --force
   if [ $? -ne 0 ]; then
