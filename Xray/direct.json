@@ -129,12 +129,6 @@
         "type": "field",
         "network": "udp,tcp",
         "outboundTag": "Freedom"
-      },
-      {
-        "type": "field",
-        "outboundTag": "warp",
-        "domain": ["reddit.com", "youtube.com", "xdaforums.com", "ifconfig.me"],
-        "network": "udp,tcp"
       }
     ]
   },
