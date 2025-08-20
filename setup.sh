@@ -1,5 +1,6 @@
-### Functions
+"""### Functions
 export ip=$(curl -s ipv4.icanhazip.com || curl -s ifconfig.me)
+export scr_dir=$(pwd)
 
 prequisites()
 {
@@ -31,10 +32,14 @@ acme_install(){
   echo -e "Installing Acme.sh..."
   sleep 3
   clear
+  if [ -d /root/.acme.sh ]; then
+    echo "Removing existing .acme.sh directory..."
+    rm -rf /root/.acme.sh
+  fi
   wget -O acme.sh https://raw.githubusercontent.com/acmesh-official/acme.sh/master/acme.sh
   bash acme.sh --install
   rm acme.sh
-  cd .acme.sh 
+  cd "$scr_dir/.acme.sh"
   bash acme.sh --register-account -m mymail@gmail.com
   bash acme.sh --issue --standalone -d $domain --force
   if [ $? -ne 0 ]; then
@@ -56,7 +61,7 @@ acme_install(){
     sleep 3
     exit 0
   fi
-}
+}""
 setup_nginx(){
   clear
   echo "[Nginx Installation Script]"
